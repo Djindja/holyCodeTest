@@ -84,4 +84,15 @@ class Car extends Model
     private $datePublished;
     private $updatedAt;
 
+    public function __construct(object $o)
+    {
+        foreach($o as $k => $v) {
+            $this->$k = $v;
+        }
+    }
+
+    public function getData(string $key) {
+        return $this->$key;
+    }
+
 }

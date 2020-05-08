@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\CarBuilder;
+use App\Http\Exceptions\HttpException;
 
 class CarController extends Controller
 {
@@ -11,8 +13,13 @@ class CarController extends Controller
      *
      * @return Response
      */
-    public function index(string $id)
+    public function index(int $id)
     {
-        return view('car')->with("id", $id);
+        try {
+            $car = CarBuilder::build($id);
+            return view('car', ['car' => $car])->with("id", $id);
+        } catch(HttpException $e) {
+            return $e->getMessage();
+        }
     }
 }
