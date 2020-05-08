@@ -13,6 +13,6 @@ class CarController extends Controller
      */
     public function index(string $id)
     {
-        return 'xaxaxa';
+        return view('car')->with("id", $id);
     }
 }
